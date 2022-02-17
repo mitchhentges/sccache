@@ -1,0 +1,20 @@
+name: awaiting response
+on:
+  issue_comment:
+    types: [created]
+  schedule:
+    - cron: '5 * * * *'
+jobs:
+  noResponse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: lee-dohm/no-response@v0.5.0
+        with:
+          closeComment: >
+            This has been automatically closed because this is blocked on a response,
+            but one hasn't bee provided yet. Of course, if the needed response is
+            provided later, then re-open this ticket so that we can progress it
+            further :)
+          responseRequiredLabel: awaiting response
+          responseRequiredColor: d4c5f9
+          token: ${{ github.token }}
